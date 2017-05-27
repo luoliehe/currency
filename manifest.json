@@ -1,0 +1,23 @@
+{
+  "name": "Digital Currency",
+  "description": "消息提示",
+  "version": "1.0",
+  "permissions": [
+    "debugger",
+	"notifications",
+	"https://www.huobi.com/",
+	"http://api.btctrade.com/"
+  ],
+  "background": {
+    "scripts": [
+    	"js/httpUtil.js",
+    	"js/jquery-3.2.1.min.js",
+    	"js/config.js",
+    	"js/util.js",
+    	"background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "manifest_version": 2
+}
+
