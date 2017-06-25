@@ -2,13 +2,29 @@
 <head>
 <meta charset="UTF-8">
 <title>设置页面</title>
-</head>
+<style type="text/css">
+ul {
+	list-style: none;
+}
+ul li{
+margin: 8px 0;
+}
+ul li label{
+width: 50px;
+display: inline-block;
+}
+ul li input{
+width: 60px;
+margin: 0 5px;
+}
+</style>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="js/options.js"></script>
 <script type="text/javascript" src="js/util.js"></script>
+</head>
 <body>
-	<label>狗币：</label><input id="DOGC" type="text"/>
-	<label>莱特币：</label><input id="LTC" type="text"/>
-	<button id="btn_submit">Save</button>
+	<ul id="setting"></ul>
+	<ul><li><button id="save">save</button ></li></ul>
 </body>
 </html>

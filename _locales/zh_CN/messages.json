@@ -1,0 +1,14 @@
+{
+	"JB":{
+		"message" : "聚",
+		"description" : "聚币网描述"
+	},
+	"HB":{
+		"message" : "火",
+		"description" : "火币网描述"
+	},
+	"JY":{
+		"message" : "交",
+		"description" : "交易网描述"
+	}
+}

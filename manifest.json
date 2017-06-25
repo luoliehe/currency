@@ -6,17 +6,20 @@
     "debugger",
 	"notifications",
 	"https://www.huobi.com/",
-	"http://api.btctrade.com/"
+	"https://api.btctrade.com/",
+	"https://www.jubi.com/"
   ],
   "background": {
     "scripts": [
-    	"js/httpUtil.js",
     	"js/jquery-3.2.1.min.js",
+    	"js/data.js",
+    	"js/pako.min.js",
     	"js/config.js",
     	"js/util.js",
     	"background.js"
     ]
   },
+  "default_locale": "zh_CN",
   "options_page": "options.html",
   "manifest_version": 2
 }
