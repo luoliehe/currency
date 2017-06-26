@@ -98,8 +98,8 @@ function showNotification() {
 	}
 	const notification = new Notification('通知', {
 		//icon : '../image/smile.jpg',
-		renotify : true,
-		tag : 'notification',
+//		renotify : true,
+//		tag : 'notification',
 		body : content.join('\n')
 	});
 	
@@ -128,7 +128,7 @@ function checkMark(){
 				key = `${website}-${coin}-height`;
 				message.push(`${website}-${coin}当前为${config.mark}高于您设置的${config.warn.height}`);
 			}
-			if(config.mark <= config.warn.height){
+			if(config.mark <= config.warn.low){
 				key = `${website}-${coin}-low`;
 				message.push(`${website}-${coin}当前为${config.mark}低于您设置的${config.warn.low}`);
 			}
@@ -141,12 +141,13 @@ function checkMark(){
 				}
 			}
 			notificationMap.set(key, new Date().getTime());
-
+			
+			const txt = message.join('\n');
 			const notification = new Notification('通知', {
 				icon : '../image/smile.jpg',
 				renotify : true,
 				tag : 'notification',
-				body : message.join('\n')
+				body : txt
 			});
 		}
 	}
