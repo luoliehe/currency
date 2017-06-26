@@ -74,14 +74,14 @@ function acquirement(){
 	[ 'ltc', 'btc', 'doge','eth','ybc'].forEach((coin) => {
 		$.getJSON(`https://api.btctrade.com/api/ticker?coin=${coin}`, (data) => {
 			cacheData.jy[coin.substring(0, 1)] = data.buy;
-			localStorage[`jy.${coin.substring(0,3)}.mark`] = data.buy;
+			localStorage[`jy.${coin}.mark`] = data.buy;
 		});
 	});
 	// 聚币网
 	[ 'dnc', 'ifc', 'bts' ].forEach((coin) => {
 		$.getJSON(`https://www.jubi.com/api/v1/ticker?coin=${coin}`, (data) => {
 			cacheData.jb[coin.substring(0, 1)] = data.buy
-			localStorage[`jb.${coin.substring(0,3)}.mark`] = data.buy;
+			localStorage[`jb.${coin}.mark`] = data.buy;
 		});
 	});
 }
@@ -98,8 +98,6 @@ function showNotification() {
 	}
 	const notification = new Notification('通知', {
 		//icon : '../image/smile.jpg',
-//		renotify : true,
-//		tag : 'notification',
 		body : content.join('\n')
 	});
 	
@@ -115,42 +113,46 @@ function showNotification() {
 const notificationMap = new Map();
 function checkMark(){
 	loadLocalStorageData();
+	const message = [];
 	for(let website in data){
 		for(let coin in data[website]){
 			const config = data[website][coin];
 			if(!config.warn.open){
 				continue;
 			}
-			console.error(config.mark , config.warn.height, config.warn.low);
-			const message = [];
+			console.log(config.mark , config.warn.height, config.warn.low);
 			let key = '';
+			let txt = '';
 			if(config.mark >= config.warn.height){
 				key = `${website}-${coin}-height`;
-				message.push(`${website}-${coin}当前为${config.mark}高于您设置的${config.warn.height}`);
+				txt = `${website}-${coin}为“${config.mark}”高于设置“${config.warn.height}”`;
 			}
 			if(config.mark <= config.warn.low){
 				key = `${website}-${coin}-low`;
-				message.push(`${website}-${coin}当前为${config.mark}低于您设置的${config.warn.low}`);
+				txt = `${website}-${coin}为“${config.mark}”低于设置“${config.warn.low}”`;
 			}
 			if(notificationMap.get(key)){
 				//5分钟不提示
 				let time = notificationMap.get(key);
-				const delay =  60 * 1000;
+				const delay = 60 * 1000;
 				if(new Date().getTime() - time < delay){
 					continue;
 				}
 			}
+			if(txt){
+				message.push(txt);
+			}
 			notificationMap.set(key, new Date().getTime());
-			
-			const txt = message.join('\n');
-			const notification = new Notification('通知', {
-				icon : '../image/smile.jpg',
-				renotify : true,
-				tag : 'notification',
-				body : txt
-			});
 		}
+		
 	}
+	if(message.length == 0){
+		return;
+	}
+	new Notification('通知', {
+		icon : '../image/smile.jpg',
+		body : message.join('\n')
+	});
 }
 
 //主动获取
